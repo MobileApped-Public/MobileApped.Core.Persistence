@@ -97,4 +97,3 @@ public void RegisterDepedencies()
 }
 ```
 
-# [Troubleshooting Guide](https://bitbucket.org/mobileapped-shared/mobileapped.core.persistence/wiki/Home/TroubleShooting)
