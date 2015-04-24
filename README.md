@@ -1,7 +1,7 @@
 
 The code contained in this repository reflects many hours of work coming to a ideal situation in that redundant functionality is abstracted out into reusable classes.
 
-## Package Installation
+# Package Installation
 This package is currently hosted on [Nuget.org](http://www.nuget.org/packages/MobileApped.Core.Persistence/)
 
 Install using the Visual Studio package manager or
@@ -10,7 +10,7 @@ from the package manager console run:
 PM> Install-Package MobileApped.Core.Persistence
 ```
 
-# Basic of Basic Usage
+# Example of Basic Usage
 ### Database Connection Strings 
 In the application's conifguration file (app.config or web.config), verify that eixsts or add the connection string section.
 ```
@@ -31,7 +31,7 @@ Example Octopus Deploy template:
 </connectionStrings>
 ```
 
-### Adding Code
+## Adding Code
 Add the following files/classes to your project:
 * NorthwindContext.cs
 * EmployeeEntity.cs
