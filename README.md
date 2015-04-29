@@ -1,5 +1,9 @@
 
+# A Testable Entity Framework Abstraction
+
 The code contained in this repository reflects many hours of work coming to a ideal situation in that redundant functionality is abstracted out into reusable classes.
+
+**For instructions on testing/mocking data sets and contexts, [see the Wiki](https://github.com/MobileApped-Public/MobileApped.Core.Persistence/wiki)**
 
 # Package Installation
 This package is currently hosted on [Nuget.org](http://www.nuget.org/packages/MobileApped.Core.Persistence/)
