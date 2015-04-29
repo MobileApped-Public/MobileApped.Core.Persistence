@@ -17,21 +17,22 @@
 #endregion
 
 using System.Reflection;
+using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Resources;
 
-[assembly: AssemblyTitle("MobileApped.Core.Persistence")]
-[assembly: AssemblyDescription("Entity Framework abstraction for repository persistence")]
+[assembly: AssemblyTitle("MobileApped.Core.Persistence.Testing")]
+[assembly: AssemblyDescription("Testing helpers for Entity Framework")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("MobileApped")]
-[assembly: AssemblyProduct("MobileApped.Core.Persistence")]
+[assembly: AssemblyProduct("MobileApped.Core.Persistence.Testing")]
 [assembly: AssemblyCopyright("Copyright © MobileApped 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 [assembly: ComVisible(false)]
-[assembly: Guid("174ac9ed-ff19-4d91-93be-289c15e31c3d")]
+
+[assembly: Guid("88f9c1ab-9350-41df-8971-4971c05351a3")]
 
 [assembly: AssemblyVersion("1.0.1")]
 [assembly: AssemblyFileVersion("1.0.1")]

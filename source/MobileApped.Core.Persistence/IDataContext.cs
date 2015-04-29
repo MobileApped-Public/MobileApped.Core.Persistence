@@ -35,10 +35,10 @@ namespace MobileApped.Core.Persistence
         /// </para>
         /// <example>
         ///     <para>
-        ///         EXEC GetEmployeeByDepartment
+        ///         StoredProcedure: GetEmployeeByDepartment
         ///     </para>
         ///     <para>
-        ///         SELECT * FROM Employee
+        ///         SQL Script: SELECT * FROM Employee
         ///     </para>
         /// </example>
         /// </summary>

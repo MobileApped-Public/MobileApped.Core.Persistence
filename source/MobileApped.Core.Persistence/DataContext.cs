@@ -28,7 +28,7 @@ using System.Transactions;
 namespace MobileApped.Core.Persistence
 {
     /// <summary>
-    /// Provides a reusable method for accessing and manipulating database entities
+    /// Provides reusable methods for accessing and manipulating database entities
     /// </summary>
     /// <typeparam name="TDataProvider">Type of DbContext</typeparam>
     public class DataContext<TDataProvider> : IDataContext<TDataProvider>
@@ -261,7 +261,7 @@ namespace MobileApped.Core.Persistence
             return context;
         }
         
-        protected DbQuery<TEntityType> CreateSetQuery<TEntityType>(
+        protected virtual DbQuery<TEntityType> CreateSetQuery<TEntityType>(
             DbContext context, 
             params Expression<Func<TEntityType, object>>[] includes)
             where TEntityType : class
