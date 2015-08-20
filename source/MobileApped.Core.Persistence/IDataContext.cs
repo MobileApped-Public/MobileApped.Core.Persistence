@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using System.Transactions;
 
 namespace MobileApped.Core.Persistence
@@ -50,6 +51,27 @@ namespace MobileApped.Core.Persistence
            where TEntityType : Entity;
 
         /// <summary>
+        /// Executes an awaitable custom sql script against the specified entity dataset.
+        /// <para>
+        /// Result of the query must match the specified entity.
+        /// </para>
+        /// <example>
+        ///     <para>
+        ///         StoredProcedure: GetEmployeeByDepartment
+        ///     </para>
+        ///     <para>
+        ///         SQL Script: SELECT * FROM Employee
+        ///     </para>
+        /// </example>
+        /// </summary>
+        /// <typeparam name="TEntityType">Type of entity</typeparam>
+        /// <param name="query">SQL Query</param>
+        /// <param name="args">Script parameters</param>
+        /// <returns>Enumeration of the specified entity type</returns>
+        Task<ICollection<TEntityType>> ExecuteSetQueryAsync<TEntityType>(string query, params object[] args)
+           where TEntityType : Entity;
+
+        /// <summary>
         /// Executes a custom sql script against the specified database
         /// <para>
         /// Result of the query can be a custom class or primitive type as long as properties map
@@ -66,20 +88,9 @@ namespace MobileApped.Core.Persistence
         /// <returns>Enumeration of the specified type</returns>
         ICollection<TResultType> ExecuteCustomQuery<TResultType>(string query, params object[] args);
 
-        /// <summary>
-        /// Allows execution of custom linq query against the specified data set
-        /// </summary>
-        /// <typeparam name="TEntityType">Type of entity</typeparam>
-        /// <param name="action">Action to invoke</param>
-        void ExecuteAction<TEntityType>(Action<DbQuery<TEntityType>> action)
-            where TEntityType : Entity;
-
         void UsingContext(Action<TDataProvider> action);
 
         TResultType UsingContext<TResultType>(Func<TDataProvider, TResultType> action);
-
-        TResultType SelectFromSet<TEntityType, TResultType>(Func<DbQuery<TEntityType>, TResultType> action)
-            where TEntityType : Entity;
 
         TEntityType FirstOrDefault<TEntityType>(Expression<Func<TEntityType, bool>> predicate, params Expression<Func<TEntityType, object>>[] includes)
             where TEntityType : Entity;
@@ -114,5 +125,18 @@ namespace MobileApped.Core.Persistence
         /// <param name="action">Action to invoke</param>
         /// <param name="isolationLevel">Transaction isolation level</param>
         void AsTransaction(Action action, IsolationLevel isolationLevel = IsolationLevel.ReadCommitted);
+
+        /// <summary>
+        /// Allows execution of custom linq query against the specified data set
+        /// </summary>
+        /// <typeparam name="TEntityType">Type of entity</typeparam>
+        /// <param name="action">Action to invoke</param>
+        [Obsolete("Use UsingContext")]
+        void ExecuteAction<TEntityType>(Action<DbQuery<TEntityType>> action)
+            where TEntityType : Entity;
+
+        [Obsolete("Use UsingContext")]
+        TResultType SelectFromSet<TEntityType, TResultType>(Func<DbQuery<TEntityType>, TResultType> action)
+            where TEntityType : Entity;
     }
 }

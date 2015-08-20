@@ -23,6 +23,7 @@ using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using System.Transactions;
 
 namespace MobileApped.Core.Persistence
@@ -34,6 +35,7 @@ namespace MobileApped.Core.Persistence
     public class DataContext<TDataProvider> : IDataContext<TDataProvider>
          where TDataProvider : DbContext, new()
     {
+        #region CUSTOM COMMANDS
         /// <inheritdoc />
         public ICollection<TEntityType> ExecuteSetQuery<TEntityType>(string query, params object[] args)
             where TEntityType : Entity
@@ -41,6 +43,15 @@ namespace MobileApped.Core.Persistence
             using (DbContext context = CreateContext())
             {
                 return context.Set<TEntityType>().SqlQuery(query, args).AsNoTracking().ToList();
+            }
+        }
+
+        public async Task<ICollection<TEntityType>> ExecuteSetQueryAsync<TEntityType>(string query, params object[] args)
+            where TEntityType : Entity
+        {
+            using (DbContext context = CreateContext())
+            {
+                return await context.Set<TEntityType>().SqlQuery(query, args).AsNoTracking().ToListAsync();
             }
         }
 
@@ -54,25 +65,16 @@ namespace MobileApped.Core.Persistence
         }
 
         /// <inheritdoc />
-        public void ExecuteAction<TEntityType>(Action<DbQuery<TEntityType>> action)
-            where TEntityType : Entity
+        public async Task<ICollection<TResultType>> ExecuteCustomQueryAsync<TResultType>(string query, params object[] args)
         {
             using (DbContext context = CreateContext())
             {
-                action(context.Set<TEntityType>().AsNoTracking());
+                return await context.Database.SqlQuery<TResultType>(query, args).ToListAsync();
             }
         }
+        #endregion
 
-        /// <inheritdoc />
-        public TResultType SelectFromSet<TEntityType, TResultType>(Func<DbQuery<TEntityType>, TResultType> action)
-                where TEntityType : Entity
-        {
-            using (DbContext context = CreateContext())
-            {
-                return action(context.Set<TEntityType>().AsNoTracking());
-            }
-        }
-
+        #region USING CONTEXT
         /// <inheritdoc />
         public void UsingContext(Action<TDataProvider> action)
         {
@@ -90,7 +92,9 @@ namespace MobileApped.Core.Persistence
                 return action(context as TDataProvider);
             }
         }
+        #endregion
 
+        #region QUERY ABSTRACTIONS
         /// <inheritdoc />
         public TEntityType FirstOrDefault<TEntityType>(
             Expression<Func<TEntityType, bool>> predicate, 
@@ -129,7 +133,9 @@ namespace MobileApped.Core.Persistence
                 return query.Where(predicate).ToList();
             }
         }
+        #endregion
 
+        #region FUNCTIONS
         /// <inheritdoc />
         public void Insert<TEntityType>(TEntityType entity)
             where TEntityType : Entity
@@ -240,7 +246,9 @@ namespace MobileApped.Core.Persistence
                 context.SaveChanges();
             }
         }
+        #endregion
 
+        #region TRANSACTIONS
         public void AsTransaction(Action action, IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
         {
             TransactionOptions transactionOptions = new TransactionOptions();
@@ -252,7 +260,9 @@ namespace MobileApped.Core.Persistence
                 transactionScope.Complete();
             }
         }
+        #endregion
 
+        #region CONTEXT/QUERY CREATION
         protected virtual DbContext CreateContext()
         {
             DbContext context = new TDataProvider();
@@ -271,7 +281,29 @@ namespace MobileApped.Core.Persistence
             {
                 query = (DbQuery<TEntityType>)query.Include(include);
             }
+            
             return query;
         }
+        #endregion
+
+        #region OBSOLETE 8/20/2015
+        [Obsolete("Use UsingContext")]
+        public void ExecuteAction<TEntityType>(Action<DbQuery<TEntityType>> action) where TEntityType : Entity
+        {
+            using (DbContext context = CreateContext())
+            {
+                action(context.Set<TEntityType>().AsNoTracking());
+            }
+        }
+
+        [Obsolete("Use UsingContext")]
+        public TResultType SelectFromSet<TEntityType, TResultType>(Func<DbQuery<TEntityType>, TResultType> action) where TEntityType : Entity
+        {
+            using (DbContext context = CreateContext())
+            {
+                return action(context.Set<TEntityType>().AsNoTracking());
+            }
+        }
+        #endregion
     }
 }
