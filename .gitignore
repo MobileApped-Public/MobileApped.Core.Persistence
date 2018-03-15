@@ -52,3 +52,8 @@ qa.config
 prod.config
 Sitefinity.lic
 Storage\FileSystem
+/source/.vs/MobileApped.Core.Persistence/v15/Server/sqlite3/storage.ide-wal
+/source/.vs/MobileApped.Core.Persistence/v15/Server/sqlite3/storage.ide-shm
+/source/.vs/MobileApped.Core.Persistence/v15/Server/sqlite3/storage.ide
+/source/.vs/MobileApped.Core.Persistence/v15/Server/sqlite3/db.lock
+/source/.vs/MobileApped.Core.Persistence/v15/Server/sqlite3
