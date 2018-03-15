@@ -6,98 +6,44 @@ The code contained in this repository reflects many hours of work coming to a id
 **For instructions on testing/mocking data sets and contexts, [see the Wiki](https://github.com/MobileApped-Public/MobileApped.Core.Persistence/wiki)**
 
 # Package Installation
-This package is currently hosted on [Nuget.org](http://www.nuget.org/packages/MobileApped.Core.Persistence/)
+Multiple packages exist in NuGet.org 
+* [MobileApped.Core.Persistence](http://www.nuget.org/packages/MobileApped.Core.Persistence/)
+* [MobileApped.Core.Persistence.InMemory](http://www.nuget.org/packages/MobileApped.Core.Persistence.InMemory/)
+* [MobileApped.Core.Persistence.SqlServer](http://www.nuget.org/packages/MobileApped.Core.Persistence.SqlServer/)
+* [MobileApped.Core.Persistence.Postgres](http://www.nuget.org/packages/MobileApped.Core.Persistence.Postgres/)
+
 
 Install using the Visual Studio package manager or
-from the package manager console run:
+from the package manager console run the following:
+
+For SqlServer:
 ```
-PM> Install-Package MobileApped.Core.Persistence
+PM> Install-Package MobileApped.Core.Persistence.SqlServer
+```
+For Postgres:
+```
+PM> Install-Package MobileApped.Core.Persistence.Postgres
+```
+For Testing:
+```
+PM> Install-Package MobileApped.Core.Persistence.InMemory
 ```
 
 # Example of Basic Usage
 ### Database Connection Strings 
 In the application's conifguration file (app.config or web.config), verify that eixsts or add the connection string section.
 ```
-<connectionStrings>
-  <add name="[DatabaseName]Entities" connectionString="data source=[HOST];initial catalog=[DatabaseName];user id=[UserName];password=[Password];MultipleActiveResultSets=True;App=[ApplicationName];" providerName="System.Data.SqlClient" />
-</connectionStrings>
+"ConnectionStrings": {
+    "[DatabaseName]": server=[host];database=[db name];
+}
 ```
-* Note: The Name of the [DatabaseName] tag needs to be the same that is used in the DbContext constructor.
+* Note: The Name of the [DatabaseName] tag needs to be the same that is used in the DbContext initializer.
 
-#### Octopus Deploy Template
-Example Octopus Deploy template:
 
-```
-<connectionStrings>
-  #{each connection in CONNECTIONS}
-    <add name="#{connection.Name}" connectionString="#{connection.SourceAndUser};password=#{connection.Password};MultipleActiveResultSets=True;App=ApplicationName;" providerName="System.Data.SqlClient" />
-  #{/each}
-</connectionStrings>
-```
-
-## Adding Code
-Add the following files/classes to your project:
-* NorthwindContext.cs
-* EmployeeEntity.cs
-* EmployeeProvider.cs
-
-#### NorthwindContext.cs - Typed DbContext
-```
-    [ExcludeFromCodeCoverage]
-    public class NorthwindContext : DbContext
-    {
-        public NorthwindContext()
-            : base("name=NorthwindEntities")
-        {
-            Configuration.AutoDetectChangesEnabled = false;
-            Configuration.LazyLoadingEnabled = false;
-        }
-    
-        public virtual DbSet<EmployeeEntity> Employees { get; set; }
-    }
-```
-
-#### EmployeeEntity.cs - Entity Mapping to the Employee table
+### Register the new Context with the default IoC container
 ```
 #!c#
-    [Table("Employee")]
-    [ExcludeFromCodeCoverage]
-    public partial class EmployeeEntity : Entity
-    {
-         [Key]
-         public int ID { get; set; }
-    }
-```
 
-#### EmployeeProvider.cs - Table provider
-```
-private IDataContext<NorthwindContext> northwindContext;
-
-// Create a context without injection
-public EmployeeProvider()
-{
-    northwindContext = new DataContext<NorthwindContext>();
-}
-
-// Construct an instance with an injected context
-public EmployeeProvider(IDataContext<NorthwindContext> northwindContext)
-{
-    this.northwindContext = northwindContext;
-}
-
-public EmployeeEntity Get(int id)
-{
-    return northwindContext.SingleOrDefault<EmployeeEntity>(d => d.ID == id);
-}
-```
-
-### Register the new Context with your prefered IoC Container
-* Note: The preferred lifetime is a Singleton
-```
-#!c#
-public void RegisterDepedencies()
-{
-     container.Register<IDataContext<NorthwindContext>, DataContext<NorthwindContext>>();
-}
+services.
 ```
 
