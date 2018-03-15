@@ -2,15 +2,26 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <NeutralLanguage>English (United States)</NeutralLanguage>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <FileVersion>2.0.0.0</FileVersion>
+    <Title>MobileApped.Core.Persistence.InMemory</Title>
+    <Description>EFCore persistence library, abstracting and simplifying dbcontext in-memory database integration</Description>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Copyright>MobileApped 2018 All Rights Reserved</Copyright>
+    <PackageLicenseUrl>https://github.com/MobileApped-Public/MobileApped.Core.Persistence/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/MobileApped-Public/MobileApped.Core.Persistence</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/MobileApped-Public/MobileApped.Core.Persistence</RepositoryUrl>
+    <RepositoryType>GIT</RepositoryType>
+    <PackageTags>EFCore, Entity Framework, Persistence, InMemory</PackageTags>
+    <Authors>Ryan.Developer</Authors>
+    <Company>MobileApped.com</Company>
+    <Version>2.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.0.2" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\MobileApped.Core.Persistence\MobileApped.Core.Persistence.csproj" />
+    <PackageReference Include="MobileApped.Core.Persistence" Version="2.0.0" />
   </ItemGroup>
 </Project>
