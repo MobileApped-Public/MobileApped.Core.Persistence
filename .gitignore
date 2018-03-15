@@ -1,5 +1,62 @@
-﻿################################################################################
-# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
-################################################################################
-
+﻿# Ignore file for Visual Studio
+# use glob syntax
+syntax: glob
+target
+*.nupkg
+# Ignore Visual Studio files
+*.orig
+*.obj
+*.exe
+*.pdb
+*.user
+*.aps
+*.pch
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.ilk
+*.log
+*.lib
+*.sbr
+*.scc
+*.pidb
+*.dll
+*.userprefs
+*.swp
+*.user
+lib
+*/bin/*
+[Dd]ebug*/
+obj/
+packages/
+[Rr]elease*/
+_ReSharper*/
+[Tt]est[Rr]esult*
+[Bb]uild[Ll]og.*
+*.[Pp]ublish.xml
+*R\#Settings
+*.sln.docstates
+ECWeb2\.userprefs
+*\Bin\
+bin
+stampinup-search-index
+Deploy
+dev.config
+qa.config
+prod.config
+Sitefinity.lic
+Storage\FileSystem
+/source/.vs/MobileApped.Core.Persistence/v15/Server/sqlite3/storage.ide-wal
+/source/.vs/MobileApped.Core.Persistence/v15/Server/sqlite3/storage.ide-shm
+/source/.vs/MobileApped.Core.Persistence/v15/Server/sqlite3/storage.ide
+/source/.vs/MobileApped.Core.Persistence/v15/Server/sqlite3/db.lock
+/source/.vs/MobileApped.Core.Persistence/v15/Server/sqlite3
 /.vs
+/source/.vs/MobilleApped.Core.Persistence/v15/Server/sqlite3
+/Test
