@@ -6,16 +6,18 @@
     <FileVersion>2.0.0.0</FileVersion>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Version>2.0.0</Version>
-    <Description>Testable Core persistence library using Entity Framework Core 2.x</Description>
+    <Title>MobileApped.Core.Persistence</Title>
+    <Description>EFCore persistence library, abstracting and simplifying dbcontext integration</Description>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Copyright>MobileApped 2018 All Rights Reserved</Copyright>
-    <PackageLicenseUrl>https://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
+    <PackageLicenseUrl>https://github.com/MobileApped-Public/MobileApped.Core.Persistence/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/MobileApped-Public/MobileApped.Core.Persistence</PackageProjectUrl>
     <RepositoryUrl>https://github.com/MobileApped-Public/MobileApped.Core.Persistence</RepositoryUrl>
     <RepositoryType>GIT</RepositoryType>
     <PackageTags>EFCore, Entity Framework, Persistence</PackageTags>
-    <PackageReleaseNotes>* Upgraded to .NETStandard 2.0
-* Removed requirement for entity classes to inherit from Entity</PackageReleaseNotes>
+    <PackageReleaseNotes>Upgraded to .NETStandard 2.0, Removed requirement for entity classes to inherit from Entity</PackageReleaseNotes>
+    <Authors>Ryan.Developer</Authors>
+    <Company>MobileApped.com</Company>
   </PropertyGroup>
 
   <ItemGroup>
