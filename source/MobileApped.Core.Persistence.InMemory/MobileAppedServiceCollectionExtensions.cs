@@ -14,7 +14,9 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             services.AddDbContext<TDbContext>(d =>
                 d.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
-                .UseInMemoryDatabase(databaseName))
+                .UseInMemoryDatabase(databaseName), 
+                contextLifetime: ServiceLifetime.Transient, 
+                optionsLifetime: ServiceLifetime.Singleton)
                 .AddEntityFrameworkInMemoryDatabase();
             
             services.AddSingleton<IDataContext<TDbContext>, DataContext<TDbContext>>();

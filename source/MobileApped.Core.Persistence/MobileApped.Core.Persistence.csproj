@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyVersion>2.0.0.0</AssemblyVersion>
-    <FileVersion>2.0.0.0</FileVersion>
+    <AssemblyVersion>2.0.1</AssemblyVersion>
+    <FileVersion>2.0.1</FileVersion>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <Version>2.0.0</Version>
+    <Version>2.0.1</Version>
     <Title>MobileApped.Core.Persistence</Title>
     <Description>EFCore persistence library, abstracting and simplifying dbcontext integration</Description>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
