@@ -30,20 +30,58 @@ PM> Install-Package MobileApped.Core.Persistence.InMemory
 ```
 
 # Example of Basic Usage
-### Database Connection Strings 
-In the application's conifguration file (app.config or web.config), verify that eixsts or add the connection string section.
-```
-"ConnectionStrings": {
-    "[DatabaseName]": server=[host];database=[db name];
+# Getting started
+
+### Create a AppSettings.json
+``` json
+{
+    "ConnectionStrings": {
+        "TestConnection" : "database connection string"
+    }
 }
 ```
-* Note: The Name of the [DatabaseName] tag needs to be the same that is used in the DbContext initializer.
 
-
-### Register the new Context with the default IoC container
+### Create an Entity class
+``` csharp
+public class Person {
+    [Key] public int ID { get; set; }
+}
 ```
-#!c#
 
-services.
+### Create a DbContext
+``` csharp
+public class PersonContext : DbContext {
+    public PersonContext(DbContextOptions options) : base(options){} // This constructor is required when using this library
+
+    public DbSet<Person> People { get; set; }
+}
+```
+
+
+### Register a DbContext with the ServiceCollection
+``` csharp
+IConfiguration configuration = new ConfigurationBuilder()
+    .AddJsonFile("AppSettings.json")
+    .Build();
+IServiceCollection services = new ServiceCollection();
+services.AddSqlServerDataContext<PersonContext>(configuration, "TestConnection");
+```
+
+### Consume the DataContext
+``` csharp
+public class HomeController : Controller {
+    private IDataContext<PersonContext> context;
+    public HomeController(IDataContext<PersonContext> context)
+    { 
+        this.context = context;
+    }
+
+    [HttpGet("api/people")]
+    public IActionResult GetPeople()
+    {
+        var people = context.UsingContext(d => d.People.ToList());
+        return Json(people);
+    }
+}
 ```
 
