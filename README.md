@@ -1,9 +1,14 @@
 
-# A Testable Entity Framework Abstraction
+# A Entity Framework Core 2.0 Abstraction For Multiple Data Providers
 
 The code contained in this repository reflects many hours of work coming to a ideal situation in that redundant functionality is abstracted out into reusable classes.
 
-**For instructions on testing/mocking data sets and contexts, [see the Wiki](https://github.com/MobileApped-Public/MobileApped.Core.Persistence/wiki)**
+This code contains project for handling service collection cotainer registrion for multiple data providers.
+
+## Currently Supported Data Providers
+* SqlServer
+* InMemory
+* Postgres
 
 # Package Installation
 Multiple packages exist in NuGet.org 
