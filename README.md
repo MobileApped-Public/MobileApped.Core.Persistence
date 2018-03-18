@@ -1,9 +1,7 @@
 
-# A Entity Framework Core 2.0 Abstraction For Multiple Data Providers
+# An Entity Framework Core 2.0 Abstraction
 
-The code contained in this repository reflects many hours of work coming to a ideal situation in that redundant functionality is abstracted out into reusable classes.
-
-This code contains project for handling service collection cotainer registrion for multiple data providers.
+This code contains projects for handling IoC registration for multiple data providers.
 
 ## Currently Supported Data Providers
 * SqlServer
@@ -90,3 +88,9 @@ public class HomeController : Controller {
 }
 ```
 
+### Testing
+
+Previously this project contained a custom mock data context for setting up mock data.
+You can now use the InMemoryDatabase for some basic code integration tests.
+
+Use a full database instance for all other critical data integration tests.
